@@ -5,44 +5,36 @@ void main() {
   runApp(MaterialApp(
     title: "Exploring UI widgets",
     home: Scaffold(
-      appBar: AppBar(
-        title: Text("Basic List View"),
-      ),
+      appBar: AppBar(title: Text("Long List"),),
       body: getListView(),
+      floatingActionButton: FloatingActionButton(onPressed: null,
+      child: Icon(Icons.add),
+        tooltip: "Add One More Item",
+      ),
     ),
   ));
 }
 
-Widget getListView() {
-  var listView = ListView(
-    children: <Widget>[
-      ListTile(
-        leading: Icon(Icons.landscape),
-        title: Text("Landscape"),
-        subtitle: Text("Beatiful View !"),
-        trailing: Icon(Icons.wb_sunny),
-        onTap: () {
-          debugPrint("Landscape tapped");
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.laptop_mac),
-        title: Text("Mac"),
-      ),
-      ListTile(
-        leading: Icon(Icons.phone_android),
-        title: Text("Phone"),
-      ),
-      ListTile(
-        leading: Icon(Icons.mail),
-        title: Text("Mail"),
-      ),
-      Text("Yet another element in List"),
-      Container(
-        color: Colors.red,
-        height: 50.0,
-      )
-    ],
+List<String> getListElements() {
+
+  var items = List<String>.generate(1000, (counter) => "Item $counter");
+  return items;
+}
+
+Widget getListView(){
+
+  var listItems = getListElements();
+
+  var listView = ListView.builder(itemBuilder: (context, index){
+
+    return ListTile(
+      leading: Icon(Icons.arrow_right),
+      title: Text(listItems[index]),
+      onTap: () {
+        debugPrint('${listItems[index]} was tapped');
+      },
+    );
+  }
   );
 
   return listView;
