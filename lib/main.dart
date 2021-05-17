@@ -5,10 +5,13 @@ void main() {
   runApp(MaterialApp(
     title: "Exploring UI widgets",
     home: Scaffold(
-      appBar: AppBar(title: Text("Long List"),),
+      appBar: AppBar(
+        title: Text("Long List"),
+      ),
       body: getListView(),
-      floatingActionButton: FloatingActionButton(onPressed: null,
-      child: Icon(Icons.add),
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        child: Icon(Icons.add),
         tooltip: "Add One More Item",
       ),
     ),
@@ -16,17 +19,14 @@ void main() {
 }
 
 List<String> getListElements() {
-
   var items = List<String>.generate(1000, (counter) => "Item $counter");
   return items;
 }
 
-Widget getListView(){
-
+Widget getListView() {
   var listItems = getListElements();
 
-  var listView = ListView.builder(itemBuilder: (context, index){
-
+  var listView = ListView.builder(itemBuilder: (context, index) {
     return ListTile(
       leading: Icon(Icons.arrow_right),
       title: Text(listItems[index]),
@@ -34,8 +34,7 @@ Widget getListView(){
         debugPrint('${listItems[index]} was tapped');
       },
     );
-  }
-  );
+  });
 
   return listView;
 }
